@@ -6,34 +6,40 @@
 %%          Mário Angel
 %%          Rodrigo Bernardino ( rbbernardino@gmail.com )
 %%
-%% Objetivo : Módulo da interface texto
+%% Objetivo : Módulo front
 
--module(bam_tui).
+-module(bam_front).
 -vsn(0.11).
 
 -author('rbbernardino@gmail.com').
 -author('mr.garcia1@hotmail.com').
 -author('andbrain@gmail.com').
 
--export([init/0, sel_op/0, ins_nome/0,
-	sel_nivel/0, ativo/0]).
+-export([start/1, restart/0, stop/0,
+	ins_nome/1, sel_op/1, sel_nivel/1
+	jogar/1]).
 
 %%-----------------------------------------------------------------------------
-%% init()
 %%   descricao da funcao, metodo utilizado, etc
 %%   nao faca linha muito grandes, respeite o limite de 80 caracteres, ou seja,
 %%   a linha com "-" acima
-init() ->
+start(UI) ->
     ok.
 
-sel_op() ->
+restart() ->
     ok.
 
-ins_nome() ->
+stop() ->
     ok.
 
-sel_nivel() ->
+ins_nome(Nome) ->
     ok.
 
-ativo() ->
+sel_op(Op) ->
+    ok.
+
+sel_nivel(Nivel) ->
+    ok.
+
+jogar(Num_pos) ->
     ok.
