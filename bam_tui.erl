@@ -26,8 +26,30 @@
 init() ->
     ok.
 
-sel_op() ->
-    ok.
+sel_oponente() ->
+    io:format("Digite o tipo de oponente desejado:~n~n"),
+    io:format("(1) Humano x Humano (2) Humano x Maquina (3) Menu Principal~n"),
+    {ok,[Opcao]} = io:fread("Opcao: ","~d"),
+    case Opcao of
+
+	3 ->
+	    init();
+
+	UmOuDois ->
+	    bam_crtl ! {bam_ui,oponente,Opcao},
+	    receive
+		{bam_ctrl,oponente,ok} ->
+		    case Opcao of
+			1 -> ins_nome({vazio,vazio});
+			2 -> sel_nivel()
+		    end;
+		{bam_ctrl,oponente,erro} ->
+		    io:format("Erro na opcao do oponente desejado!~n"),
+		    sel_oponente()
+	    end.
+
+end.
+
 
 ins_nome() ->
     ok.
@@ -38,5 +60,5 @@ sel_nivel() ->
 inicia_part() ->
     io:format("------------ INICIANDO PARTIDA ------------\n"
 
-ativo() ->
-    
+	      ativo() ->
+
