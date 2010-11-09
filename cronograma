@@ -1,0 +1,35 @@
+Segunda - 08/11
+
+What: Cronograma
+Why:  Dividir as tarefas
+Who:  Todos
+How:  Discussão em grupo
+
+What: Diagrama da estrutura
+Why:  Ter uma ideia geral do funcionamento
+Who:  Anderson
+How:  Editor de diagramas Dia
+
+What: Descrição da estrutura (implementação)
+Why:  Conhecer mais sobre o erlang
+      e ter uma direção ao fazer cada função
+Who:  Todos
+How:  Discussão em grupo
+
+
+Terça - 09/11
+
+What: bam_tui:init()
+Why:  Iniciar interface de texto
+Who:  Mário
+How:  Imprimir Cabeçalho e menu
+
+What: bam_tui:sel_op()
+Why:  Fazer segunda parte da interface
+Who:  Anderson
+How:  Imprimir pergunta e tratar entradas
+
+What: bom_tui:ativo()
+Why:  Ter função principal do jogo da velha
+Who:  Rodrigo
+How:  Tratar os diversos estados do jogo
