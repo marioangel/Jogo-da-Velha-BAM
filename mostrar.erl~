@@ -1,0 +1,14 @@
+
+
+funcao() ->
+    case Teste of
+	3 ->
+	    ok;
+
+	Outra_coisa ->
+	    proc ! Outra_coisa;
+
+	Ainda_outra_coisa ->
+
+
+    end.

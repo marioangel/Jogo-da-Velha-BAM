@@ -1,0 +1,36 @@
+bam_ui  ->  bam_ctrl
+
+- {bam_ui, sair}
+- {bam_ui, oponente, Opcao}
+- {bam_ui, nome1, Nome}
+- {bam_ui, nome2, Nome}
+- {bam_ui, sel_nivel, Nivel}
+- {bam_ui, nv_partida}
+- {bam_ui, jogada, Jogada}
+- {bam_ui, reiniciar_jogo}
+- {bam_ui, reiniciar_partida}
+
+
+bam_ctrl -> bam_ui
+
+- {bam_ctrl, oponente, ok}
+- {bam_ctrl, oponente, erro}
+- {bam_ctrl, nome, ok}
+- {bam_ctrl, sel_nivel, ok}
+- {bam_ctrl, sel_nivel, erro}
+- {bam_ctrl, Tabuleiro, {Nome1, Nome2}, Estado}
+
+Tabuleiro = { L1, L2, L3 }
+LN = { PN1, PN2, PN3 }
+PNX = o | x | vazio
+
+Estado = jogando | empate | vitoria
+
+Exemplo de tabuleiro e estado
+T = {
+	{ o, x, vazio },
+	{ x, o, vazio },
+	{ x, x, vazio },
+    }
+
+Estado = jogando

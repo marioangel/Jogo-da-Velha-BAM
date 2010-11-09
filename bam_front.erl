@@ -6,7 +6,7 @@
 %%          Mário Angel
 %%          Rodrigo Bernardino ( rbbernardino@gmail.com )
 %%
-%% Objetivo : Módulo front
+%% Objetivo : Módulo front - função para iniciar o jogo
 
 -module(bam_front).
 -vsn(0.11).
@@ -20,26 +20,20 @@
 	jogar/1]).
 
 %%-----------------------------------------------------------------------------
-%%   descricao da funcao, metodo utilizado, etc
-%%   nao faca linha muito grandes, respeite o limite de 80 caracteres, ou seja,
-%%   a linha com "-" acima
-start(UI) ->
-    ok.
+%% start( UI )
+%%   -> inicia os processos do jogo
+%%   -> dependendo da interface selecionada, inicia a GUI ou TUI
 
-restart() ->
-    ok.
+start( text_ui ) ->
+    register( bam_ui,   spawn( bam_tui,  init,  [] ) ),
+    register( bam_ctrl, spawn( bam_ctrl, start, [] ) ),
+    ok;
 
-stop() ->
-    ok.
+start( graf_ui ) ->
+    register( bam_ui,   spawn( bam_gui,  init,  [] ) ),
+    register( bam_ctrl, spawn( bam_ctrl, start, [] ) ),
+    ok;
 
-ins_nome(Nome) ->
-    ok.
-
-sel_op(Op) ->
-    ok.
-
-sel_nivel(Nivel) ->
-    ok.
-
-jogar(Num_pos) ->
-    ok.
+start( _ ) ->
+    io:format("Tipo de interface invalido!\n" ++ 
+	      "Jogo nao iniciado!\n\n").

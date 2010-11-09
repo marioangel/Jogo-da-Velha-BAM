@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<XMI verified="false" xmi.version="1.2" timestamp="2010-11-07T21:39:05" xmlns:UML="http://schema.omg.org/spec/UML/1.3">
+<XMI verified="false" xmi.version="1.2" timestamp="2010-11-09T18:08:01" xmlns:UML="http://schema.omg.org/spec/UML/1.3">
  <XMI.header>
   <XMI.documentation>
    <XMI.exporter>umbrello uml modeller http://uml.sf.net</XMI.exporter>
@@ -30,12 +30,34 @@
         <UML:DataType stereotype="datatype" visibility="public" isSpecification="false" namespace="Datatypes" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="G1QDn6mx3M1u" name="string"/>
        </UML:Namespace.ownedElement>
       </UML:Package>
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="S3pz4lATRwaZ" name="bam_ui"/>
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="NsBOfAROIuqC" name="bam_ctrl"/>
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="SelzAu7wHMPJ" name="bam_ttt"/>
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="76LsebyqWpNK" name="new_class"/>
      </UML:Namespace.ownedElement>
      <XMI.extension xmi.extender="umbrello">
       <diagrams>
-       <diagram showopsig="1" linecolor="#ff0000" snapx="10" showattribassocs="1" snapy="10" linewidth="0" showattsig="1" showpubliconly="1" showpackage="1" showstereotype="1" name="diagrama de classe" font="Sans Serif,9,-1,0,50,0,0,0,0,0" canvasheight="726" canvaswidth="1216" localid="" snapcsgrid="0" showgrid="0" showops="1" usefillcolor="1" fillcolor="#ffff00" zoom="100" xmi.id="8TPQ8YI4aMwa" documentation="" showscope="1" snapgrid="0" showatts="1" type="1">
+       <diagram showopsig="1" linecolor="#ff0000" snapx="10" showattribassocs="1" snapy="10" linewidth="0" showattsig="1" showpubliconly="1" showpackage="1" showstereotype="1" name="diagrama de classe" font="Sans Serif,9,-1,0,50,0,0,0,0,0" canvasheight="511" canvaswidth="779" localid="" snapcsgrid="0" showgrid="0" showops="1" usefillcolor="1" fillcolor="#ffff00" zoom="100" xmi.id="8TPQ8YI4aMwa" documentation="" showscope="1" snapgrid="0" showatts="1" type="1">
         <widgets/>
         <messages/>
+        <associations/>
+       </diagram>
+       <diagram showopsig="1" linecolor="#ff0000" snapx="10" showattribassocs="1" snapy="10" linewidth="0" showattsig="1" showpubliconly="1" showpackage="1" showstereotype="1" name="Selecionar oponente" font="Sans Serif,9,-1,0,50,0,0,0,0,0" canvasheight="511" canvaswidth="779" localid="CMkAqLGbYJSu" snapcsgrid="0" showgrid="0" showops="1" usefillcolor="1" fillcolor="#ffff00" zoom="100" xmi.id="5AeHwttL5mis" documentation="" showscope="1" snapgrid="0" showatts="1" type="3">
+        <widgets>
+         <objectwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="none" usesdiagramusefillcolor="1" instancename="" x="70" decon="0" showstereotype="1" y="21" font="Sans Serif,9,-1,0,50,0,1,0,0,0" localid="118o3eI6puOl" width="68" isinstance="0" multipleinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="qjNWDIoBQ4el" height="59" drawasactor="1"/>
+         <objectwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="none" usesdiagramusefillcolor="1" instancename="" x="200" decon="0" showstereotype="1" y="48" font="Sans Serif,9,-1,0,50,0,1,0,0,0" localid="HPrbNoVKAbHE" width="66" isinstance="0" multipleinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="S3pz4lATRwaZ" height="24" drawasactor="0"/>
+         <objectwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="none" usesdiagramusefillcolor="1" instancename="" x="336" decon="0" showstereotype="1" y="48" font="Sans Serif,9,-1,0,50,0,1,0,0,0" localid="UNUtE3E3ZYB8" width="75" isinstance="0" multipleinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="NsBOfAROIuqC" height="24" drawasactor="0"/>
+         <objectwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="none" usesdiagramusefillcolor="1" instancename="" x="480" decon="0" showstereotype="1" y="48" font="Sans Serif,9,-1,0,50,0,1,0,0,0" localid="oah6tU1NhL7p" width="70" isinstance="0" multipleinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="SelzAu7wHMPJ" height="24" drawasactor="0"/>
+         <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" usesdiagramusefillcolor="1" x="131" showstereotype="1" y="124" text="Oponente" font="Sans Serif,9,-1,0,50,0,0,0,0,0" pretext="" role="700" width="67" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="qxOt4d28WpHO" height="18"/>
+         <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" usesdiagramusefillcolor="1" x="274" showstereotype="1" y="141" text="Oponente" font="Sans Serif,9,-1,0,50,0,0,0,0,0" pretext="" role="700" width="67" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="YN1AgcuTCcSn" height="18"/>
+         <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" usesdiagramusefillcolor="1" x="417" showstereotype="1" y="182" text="" font="Sans Serif,9,-1,0,50,0,0,0,0,0" pretext="" role="700" width="8" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="stpXzJazn5RU" height="18"/>
+         <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" usesdiagramusefillcolor="1" x="284" showstereotype="1" y="201" text="ok" font="Sans Serif,9,-1,0,50,0,0,0,0,0" pretext="" role="700" width="22" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="ZajOGY2vBV03" height="18"/>
+         <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" usesdiagramusefillcolor="1" x="154" showstereotype="1" y="184" text="ok" font="Sans Serif,9,-1,0,50,0,0,0,0,0" pretext="" role="700" width="22" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="IZFQnX7kE1Ev" height="18"/>
+        </widgets>
+        <messages>
+         <messagewidget linecolor="none" usesdiagramfillcolor="1" widgetbid="HPrbNoVKAbHE" operation="" linewidth="none" seqnum="" usesdiagramusefillcolor="1" x="104" showstereotype="1" y="142" widgetaid="118o3eI6puOl" font="Sans Serif,9,-1,0,50,0,0,0,0,0" width="137" isinstance="0" usefillcolor="1" fillcolor="none" xmi.id="67inTpcyqzxE" height="32" sequencemessagetype="1000"/>
+         <messagewidget linecolor="none" usesdiagramfillcolor="1" widgetbid="UNUtE3E3ZYB8" operation="" linewidth="none" seqnum="" usesdiagramusefillcolor="1" x="233" showstereotype="1" y="162" widgetaid="HPrbNoVKAbHE" font="Sans Serif,9,-1,0,50,0,0,0,0,0" width="148" isinstance="0" usefillcolor="1" fillcolor="none" xmi.id="djrUDerVoBGy" height="32" sequencemessagetype="1000"/>
+        </messages>
         <associations/>
        </diagram>
       </diagrams>
@@ -106,7 +128,7 @@
      </UML:Namespace.ownedElement>
      <XMI.extension xmi.extender="umbrello">
       <diagrams>
-       <diagram showopsig="1" linecolor="#ff0000" snapx="10" showattribassocs="1" snapy="10" linewidth="0" showattsig="1" showpubliconly="1" showpackage="1" showstereotype="1" name="tic-tac-toe" font="Sans Serif,9,-1,0,50,0,0,0,0,0" canvasheight="726" canvaswidth="1216" localid="" snapcsgrid="0" showgrid="0" showops="1" usefillcolor="1" fillcolor="#ffff00" zoom="100" xmi.id="MJ3ykVq9A8dM" documentation="O sistema deve mostrar a situação atual do tabuleiro os baloes q mudaram de cor representao uma intereção &#xa;&#xa;1 fase - humano versus Humano(apenas interface texto) versao 0.1&#xa;2 fase - humana versus pc&#xa;3 fase - reiniciar &#xa;&#xa;&#xa;azul - desenvolvimento&#xa;amarelo- para fazer&#xa;verde - feito&#xa;&#xa;" showscope="1" snapgrid="0" showatts="1" type="2">
+       <diagram showopsig="1" linecolor="#ff0000" snapx="10" showattribassocs="1" snapy="10" linewidth="0" showattsig="1" showpubliconly="1" showpackage="1" showstereotype="1" name="tic-tac-toe" font="Sans Serif,9,-1,0,50,0,0,0,0,0" canvasheight="494" canvaswidth="874" localid="" snapcsgrid="0" showgrid="0" showops="1" usefillcolor="1" fillcolor="#ffff00" zoom="100" xmi.id="MJ3ykVq9A8dM" documentation="O sistema deve mostrar a situação atual do tabuleiro os baloes q mudaram de cor representao uma intereção &#xa;&#xa;1 fase - humano versus Humano(apenas interface texto) versao 0.1&#xa;2 fase - humana versus pc&#xa;3 fase - reiniciar &#xa;&#xa;&#xa;azul - desenvolvimento&#xa;amarelo- para fazer&#xa;verde - feito&#xa;&#xa;" showscope="1" snapgrid="0" showatts="1" type="2">
         <widgets>
          <actorwidget width="58" showstereotype="1" x="367" y="245" usesdiagramusefillcolor="1" usesdiagramfillcolor="1" isinstance="0" fillcolor="none" height="59" linecolor="none" xmi.id="qjNWDIoBQ4el" usefillcolor="1" linewidth="none" font="Sans Serif,9,-1,0,50,0,0,0,0,0"/>
          <usecasewidget width="113" showstereotype="1" x="328" y="42" usesdiagramusefillcolor="1" usesdiagramfillcolor="0" isinstance="0" fillcolor="#ffff00" height="49" linecolor="none" xmi.id="Po9nUEIIwep9" usefillcolor="1" linewidth="none" font="Sans Serif,9,-1,0,50,0,0,0,0,0"/>
@@ -127,7 +149,7 @@
            <endpoint endx="732" endy="432"/>
            <point x="732" y="392"/>
           </linepath>
-          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" usesdiagramusefillcolor="1" x="739" showstereotype="1" y="376" text="&lt;&lt;include>>" font="Sans Serif,9,-1,0,50,0,0,0,0,0" pretext="" role="703" width="92" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="8WUAiF3z0xks" height="18"/>
+          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" usesdiagramusefillcolor="1" x="739" showstereotype="1" y="376" text="&lt;&lt;include>>" font="Sans Serif,9,-1,0,50,0,0,0,0,0" pretext="" role="703" width="92" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="xTHqFVUsGUr9" height="18"/>
          </assocwidget>
          <assocwidget indexa="1" indexb="1" widgetaid="Po9nUEIIwep9" linecolor="none" totalcounta="2" xmi.id="vdDhw9k1l2Nt" widgetbid="qjNWDIoBQ4el" totalcountb="3" type="503" linewidth="none">
           <linepath>
@@ -204,11 +226,16 @@
   </UML:Model>
  </XMI.content>
  <XMI.extensions xmi.extender="umbrello">
-  <docsettings viewid="MJ3ykVq9A8dM" uniqueid="oXTIaFY5Rn0D" documentation="O sistema deve mostrar a situação atual do tabuleiro os baloes q mudaram de cor representao uma intereção &#xa;&#xa;1 fase - humano versus Humano(apenas interface texto) versao 0.1&#xa;2 fase - humana versus pc&#xa;3 fase - reiniciar &#xa;&#xa;&#xa;azul - desenvolvimento&#xa;amarelo- para fazer&#xa;verde - feito&#xa;&#xa;"/>
+  <docsettings viewid="5AeHwttL5mis" uniqueid="IZFQnX7kE1Ev" documentation="O sistema deve mostrar a situação atual do tabuleiro os baloes q mudaram de cor representao uma intereção &#xa;&#xa;1 fase - humano versus Humano(apenas interface texto) versao 0.1&#xa;2 fase - humana versus pc&#xa;3 fase - reiniciar &#xa;&#xa;&#xa;azul - desenvolvimento&#xa;amarelo- para fazer&#xa;verde - feito&#xa;&#xa;"/>
   <listview>
    <listitem open="1" type="800" id="Views">
-    <listitem open="0" type="801" id="Logical View">
+    <listitem open="1" type="801" id="Logical View">
      <listitem open="0" type="807" id="8TPQ8YI4aMwa" label="diagrama de classe"/>
+     <listitem open="0" type="810" id="5AeHwttL5mis" label="Selecionar oponente"/>
+     <listitem open="1" type="813" id="NsBOfAROIuqC"/>
+     <listitem open="1" type="813" id="SelzAu7wHMPJ"/>
+     <listitem open="1" type="813" id="S3pz4lATRwaZ"/>
+     <listitem open="1" type="813" id="76LsebyqWpNK"/>
      <listitem open="0" type="830" id="Datatypes">
       <listitem open="1" type="829" id="cCMCjJfhKQl4"/>
       <listitem open="1" type="829" id="54o7AFWaO4qQ"/>

@@ -35,5 +35,8 @@ ins_nome() ->
 sel_nivel() ->
     ok.
 
+inicia_part() ->
+    io:format("------------ INICIANDO PARTIDA ------------\n"
+
 ativo() ->
-    ok.
+    
