@@ -50,6 +50,7 @@ How:  receber os nomes e enviá-los para o ctrl
 
 What: bam_tui:sel_nivel()
 Why:  permitir selecionar o nivel
+Who:  Mario
 How:  receber o nível e enviá-lo ao ctrl
 
 What: bam_ctrl:set_nome eset_nivel
