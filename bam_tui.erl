@@ -66,6 +66,10 @@ sel_oponente() ->
 
 end.
 
+%%-----------------------------------------------------------------------------
+%%ins_nome()
+%%   
+%% Permitir inserir o nome dos jogadores
 
 ins_nome( {vazio,vazio} ) ->
 	    io:format("Digite o nome dos jogadores...~n"),
@@ -91,10 +95,32 @@ ins_nome( {computador,vazio} ) ->
 	    receive
 		{bam_ctrl,nome,ok} ->
 		    nv_partida()
-	    end.    
+	    end.
 
-sel_nivel() ->
-    ok.
+%%-----------------------------------------------------------------------------
+%%sel_nivel()
+%%   
+%% Escolha do nivel do computador    
+
+sel_nivel( {computador,vazio} ) ->
+	   io:format(
+	   "Tipos de niveis:\n"++
+	   "(1)Nivel Facil\n"++
+	   "(2)Nivel Intermediario\n"++
+	   "(3)Nivel Dificil\n"),
+
+	   Read = io: fread("Escolha Opcao: ","~d"),
+	   case Read of
+	   	   {ok,[1]} -> bam_ctrl ! {bam_ui, sel_nivel, facil},
+				ins_nome({computador,vazio});
+		   {ok,[2]} -> bam_ctrl ! {bam_ui, sel_nivel, intermediario},
+				ins_nome({computador,vazio});
+		   {ok,[3]} -> bam_ctrl ! {bam_ui, sel_nivel, dificil},
+				ins_nome({computador,vazio});
+		   {ok, _} -> io:format("\nOPCAO INVALIDA\n"++
+				        "TENTE NOVAMENTE\n\n"),
+				selnivel()
+	   end.
 
 nv_partida() ->
     ok.
