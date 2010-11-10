@@ -8,7 +8,7 @@ How:  Discussão em grupo
 What: Diagrama da estrutura
 Why:  Ter uma ideia geral do funcionamento
 Who:  Anderson
-How:  Editor de diagramas Dia
+How:  Editor de diagram																						as Dia
 
 What: Descrição da estrutura (implementação)
 Why:  Conhecer mais sobre o erlang
@@ -25,7 +25,7 @@ Who:  Mário
 How: Imprimir primeiras linhas e permitir
      escolher entre iniciar partida ou sair
 
-What: bam_tui:sel_oponente()
+What: bam_tui:sel_oponent				e()
 Why:  Permitir o jogador selecionar o tipo
       de oponente
 Who:  Anderson

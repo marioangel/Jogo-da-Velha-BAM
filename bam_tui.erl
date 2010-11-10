@@ -38,9 +38,10 @@ init() ->
 	end.
 %%-----------------------------------------------------------------------------
 %%sel_oponente()
-%%   funcao, metodo utilizado, etc
-%%   nao faca linha muito grandes, respeite o limite de 80 caracteres, ou seja,
-%%   a linha com "-" acima
+%%   
+%% Escolha do tipo de oponente enviando para o modulo de controle			
+%% de controle a opcao desejada e esperando um OK
+
 sel_oponente() ->
     io:format("Digite o tipo de oponente desejado:~n~n"),
     io:format("(1) Humano x Humano (2) Humano x Maquina (3) Menu Principal~n"),
@@ -67,6 +68,9 @@ end.
 
 
 ins_nome(_) ->
+
+
+
     ok.
 
 sel_nivel() ->
