@@ -2,8 +2,7 @@ bam_ui  ->  bam_ctrl
 
 - {bam_ui, init ,sair}
 - {bam_ui, sel_oponente, oponente, Opcao}
-- {bam_ui, ins_nome, nome1, Nome}
-- {bam_ui, ins_nome, nome2, Nome}
+- {bam_ui, ins_nome, nome, Nome}
 - {bam_ui, sel_nivel, Nivel}
 - {bam_ui, nv_partida}
 - {bam_ui, ativo, jogada, Jogada}

@@ -54,7 +54,7 @@ sel_oponente() ->
 	_UmOuDois ->
 	    bam_crtl ! {bam_ui,oponente,Opcao},
 	    receive
-		{bam_ctrl,oponente,ok} ->
+		{bam_ctrl, sel_oponente, oponente,ok} ->
 		    case Opcao of
 			1 -> ins_nome({vazio,vazio});
 			2 -> sel_nivel()
@@ -67,16 +67,36 @@ sel_oponente() ->
 end.
 
 
-ins_nome(_) ->
+ins_nome( {vazio,vazio} ) ->
+	    io:format("Digite o nome dos jogadores...~n"),
+	    
+	    {ok,Nome1} = io:fread("Jogador 1: ","~s"),
+	    {ok,Nome2} = io:fread("Jogador 2: ","~s"),
+	    
+	    bam_ctrl ! {bam_ui,ins_nome,nome,{Nome1,Nome2}},
+	    
+	    receive
+		{bam_ctrl,nome,ok} ->
+		    nv_partida()
+	    end;
 
+ins_nome( {computador,vazio} ) ->
 
-
-    ok.
+	    io:format("Digite o nome do jogador...~n"),
+	    
+	    {ok,Nome} = io:fread("Jogador 1: ","~s"),
+	    
+	    bam_ctrl ! {bam_ui,ins_nome,nome,{Nome,"Computador"}},
+	    
+	    receive
+		{bam_ctrl,nome,ok} ->
+		    nv_partida()
+	    end.    
 
 sel_nivel() ->
     ok.
 
-inicia_part() ->
+nv_partida() ->
     ok.
 
 ativo() ->
