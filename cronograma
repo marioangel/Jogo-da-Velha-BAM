@@ -20,16 +20,39 @@ How:  Discussão em grupo
 Terça - 09/11
 
 What: bam_tui:init()
-Why:  Iniciar interface de texto
+Why:  Iniciar a interface
 Who:  Mário
-How:  Imprimir Cabeçalho e menu
+How: Imprimir primeiras linhas e permitir
+     escolher entre iniciar partida ou sair
 
-What: bam_tui:sel_op()
-Why:  Fazer segunda parte da interface
+What: bam_tui:sel_oponente()
+Why:  Permitir o jogador selecionar o tipo
+      de oponente
 Who:  Anderson
-How:  Imprimir pergunta e tratar entradas
+How:  Imprimir prompt e tratar da opção escolhida      
 
-What: bom_tui:ativo()
-Why:  Ter função principal do jogo da velha
+What: iniciar bam_ctrl
+Why:  Permitir fazer o primeiro protótipo 
 Who:  Rodrigo
-How:  Tratar os diversos estados do jogo
+How:  Implementar funções iniciais para testar ui
+
+What: definir protocolo entre processos
+Why:  padronizar a comunicação entre processos
+Who:  Todos
+How:  discussão em grupo
+
+Quarta - 10/11
+
+What: bam_tui:ins_nome()
+Why:  permitir inserir o(s) nome(s)
+Who:  Anderson
+How:  receber os nomes e enviá-los para o ctrl
+
+What: bam_tui:sel_nivel()
+Why:  permitir selecionar o nivel
+How:  receber o nível e enviá-lo ao ctrl
+
+What: bam_ctrl:set_nome eset_nivel
+Why:  dar procedimento com o protótipo
+Who:  Rodrigo
+How:  concluir protótipo das funções para testar ui

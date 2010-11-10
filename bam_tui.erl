@@ -15,7 +15,7 @@
 -author('mr.garcia1@hotmail.com').
 -author('andbrain@gmail.com').
 
--export([init/0, sel_op/0, ins_nome/0,
+-export([init/0, sel_oponente/0, ins_nome/1,
 	sel_nivel/0, ativo/0]).
 
 %%-----------------------------------------------------------------------------
@@ -50,7 +50,7 @@ sel_oponente() ->
 	3 ->
 	    init();
 
-	UmOuDois ->
+	_UmOuDois ->
 	    bam_crtl ! {bam_ui,oponente,Opcao},
 	    receive
 		{bam_ctrl,oponente,ok} ->
@@ -61,19 +61,22 @@ sel_oponente() ->
 		{bam_ctrl,oponente,erro} ->
 		    io:format("Erro na opcao do oponente desejado!~n"),
 		    sel_oponente()
-	    end.
+	    end
 
 end.
 
 
-ins_nome() ->
+ins_nome(_) ->
     ok.
 
 sel_nivel() ->
     ok.
 
 inicia_part() ->
-    io:format("------------ INICIANDO PARTIDA ------------\n"
+    ok.
 
-	      ativo() ->
+ativo() ->
+    ok.
 
+sair() ->
+    ok.
