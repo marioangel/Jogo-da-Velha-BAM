@@ -77,7 +77,7 @@ ins_nome( {vazio,vazio} ) ->
 	    {ok,Nome1} = io:fread("Jogador 1: ","~s"),
 	    {ok,Nome2} = io:fread("Jogador 2: ","~s"),
 	    
-	    bam_ctrl ! {bam_ui,ins_nome,nome,{Nome1,Nome2}},
+	    bam_ctrl ! {bam_ui, nomes,{Nome1,Nome2}},
 	    
 	    receive
 		{bam_ctrl,nome,ok} ->
@@ -93,7 +93,7 @@ ins_nome( {computador,vazio} ) ->
 	    bam_ctrl ! {bam_ui,ins_nome,nome,{Nome,"Computador"}},
 	    
 	    receive
-		{bam_ctrl,nome,ok} ->
+		{bam_ctrl,nomes,ok} ->
 		    nv_partida()
 	    end.
 
@@ -102,7 +102,7 @@ ins_nome( {computador,vazio} ) ->
 %%   
 %% Escolha do nivel do computador    
 
-sel_nivel( {computador,vazio} ) ->
+sel_nivel() ->
 	   io:format(
 	   "Tipos de niveis:\n"++
 	   "(1)Nivel Facil\n"++
@@ -111,15 +111,15 @@ sel_nivel( {computador,vazio} ) ->
 
 	   Read = io: fread("Escolha Opcao: ","~d"),
 	   case Read of
-	   	   {ok,[1]} -> bam_ctrl ! {bam_ui, sel_nivel, facil},
+	   	   {ok,[1]} -> bam_ctrl ! {bam_ui, nivel, facil},
 				ins_nome({computador,vazio});
-		   {ok,[2]} -> bam_ctrl ! {bam_ui, sel_nivel, intermediario},
+		   {ok,[2]} -> bam_ctrl ! {bam_ui, nivel, intermediario},
 				ins_nome({computador,vazio});
-		   {ok,[3]} -> bam_ctrl ! {bam_ui, sel_nivel, dificil},
+		   {ok,[3]} -> bam_ctrl ! {bam_ui, nivel, dificil},
 				ins_nome({computador,vazio});
 		   {ok, _} -> io:format("\nOPCAO INVALIDA\n"++
 				        "TENTE NOVAMENTE\n\n"),
-				selnivel()
+				sel_nivel()
 	   end.
 
 nv_partida() ->

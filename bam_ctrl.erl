@@ -15,8 +15,8 @@
 -author('mr.garcia1@hotmail.com').
 -author('andbrain@gmail.com').
 
--export([start/0, set_oponente/0, set_nome/2,
-	 set_nivel/0, ativo_hum/0, ativo_pc/0]).
+-export([start/0, set_oponente/0, set_nome/1,
+	 set_nivel/1, ativo_hum/3, ativo_pc/4]).
 
 %%-----------------------------------------------------------------------------
 %% start()
@@ -27,28 +27,67 @@ start() ->
 
 set_oponente() ->
     receive
-	{bam_ui, oponente, Opcao} ->
-	    case Opcao of
-		hum ->
-		    set_nome(hum, {vazio, vazio});
-		robo ->
-		    set_nome(rodo, {vazio, "Computador"});
-		_ ->
-		    bam_ui ! {bam_ctrl, oponente, erro},
-		    set_oponente()
-	    end;
+	{bam_ui, oponente, humano} ->
+	    bam_ui ! {bam_ctrl, oponente, ok},
+	    set_nome( hum );
+	
+	{bam_ui, oponente, robo} ->
+	    bam_ui ! {bam_ctrl, oponente, ok},
+	    set_nome( robo );
+	
+	{bam_ui, oponente, _} ->
+	    bam_ui ! {bam_ctrl, oponente, erro};
+
 	{bam_ui, reiniciar_jogo} ->
 	    start()
     end.
 
-set_nome(_, _) ->
+%%-----------------------------------------------------------------------------
+%% set_nome( Tipo_oponente )
+%%    -> recebe o nome dos jogadores
+%%    -> envia confirmação para ui
+%%
+%% Tipo_oponente = humano | robo
+
+set_nome( Tipo_oponente ) ->
+    receive
+	{bam_ui, nomes, Nomes} ->
+	    bam_ui ! {bam_ctrl, nomes, ok},
+	    case Tipo_oponente of
+		humano -> inicia_part( Tipo_oponente, Nomes );
+		robo -> set_nivel ( Nomes )
+	    end
+    end.
+
+%%-----------------------------------------------------------------------------
+%% set_nivel( Nomes )
+%%    -> recebe o nivel e vai para ativo_pc
+
+set_nivel( Nomes ) ->
+    receive
+	{bam_ui, nivel, Nivel} ->
+	    inicia_part( {robo, Nivel}, Nomes )
+    end.
+
+%%-----------------------------------------------------------------------------
+%% inicia_part( Tipo_oponente )
+%%    -> determina condições iniciais (tabuleiro, estado)
+%%    -> vai para estado ativo
+
+inicia_part( Tipo_oponente, Nomes ) ->
+    Tabuleiro = { {vazio, vazio, vazio},
+		  {vazio, vazio, vazio},
+		  {vazio, vazio, vazio}
+		 },
+    Estado = jogando,
+    
+    case Tipo_oponente of
+	humano        -> ativo_hum(Tabuleiro, Estado, Nomes);
+	{robo, Nivel} -> ativo_pc (Tabuleiro, Estado, Nomes, Nivel)
+    end.
+
+ativo_hum(_Tabuleiro, _Estado, _Nomes) ->
     ok.
 
-set_nivel() ->
-    ok.
-
-ativo_hum() ->
-    ok.
-
-ativo_pc() ->
+ativo_pc(_Tabuleiro, _Estado, _Nomes, _Nivel) ->
     ok.
