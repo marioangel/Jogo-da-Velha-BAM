@@ -60,6 +60,12 @@ How:  concluir protótipo das funções para testar ui
 
 Quinta - 11/11
 
+What: atualizar cronograma
+Why:  atividades previstas não puderam ser concluídas
+Who:  Rodrigo
+
+Sexta - 12/11
+
 What: testar primeira versão
 Why:  verificar se tudo o que foi feito está correto
 Who:  Todos
@@ -72,3 +78,16 @@ Who:  Todos
 How:  Discussão em grupo, remontagem dos
       diagramas de sequência, replanejar
       algumas partes do projeto
+
+What: organizar as versões
+Why:  definir bem o que fazer e garantir
+      a funcionalidade de cada parte
+Who:  Rodrigo
+How:  verificar o que já foi feito e definir o que
+      precisa ser feito
+
+What: interface da partida humano x humano
+Why:  fazer a versão inicial do jogo da velha
+Who:  Anderson e Mário
+How:  desenhar tabuleiro, fazer jogadas e receber
+      resultados, exibindo-os na tela
