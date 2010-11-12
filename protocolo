@@ -33,6 +33,7 @@ bam_ctrl -> bam_ui
 - {bam_ctrl, nomes, ok}
 - {bam_ctrl, sel_nivel, ok}
 - {bam_ctrl, sel_nivel, erro}
+- {bam_ctrl, nv_partida, ok}
 - {bam_ctrl, Tabuleiro, {Nome1, Nome2}, Estado}
 
 Tabuleiro = { L1, L2, L3 }

@@ -122,8 +122,17 @@ sel_nivel() ->
 				sel_nivel()
 	   end.
 
+%%-----------------------------------------------------------------------------
+%%nv_partida()
+%%   
+%% Inica uma nova partida
+
 nv_partida() ->
-    ok.
+     	    io:format("\n\nUMA NOVA PARTIDA SERA INICADA\n\n"),
+	    
+	    bam_ctrl ! {bam_ui, nv_partida},
+	    
+	    ativo().
 
 ativo() ->
     ok.
