@@ -151,4 +151,6 @@ ativo() ->
     ok.
 
 sair() ->
-    ok.
+
+    io:format("\n\nSaindo do jogo da velha\n"),
+    bam_ctrl ! {bam_ui, sair}.
