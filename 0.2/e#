@@ -1,0 +1,42 @@
+#!/usr/bin/env escript
+
+main ( Args ) ->
+    case length( Args ) of
+	0 -> sel_ui();
+	_ -> check_ui( hd(Args) )
+    end.
+
+sel_ui() ->
+    io:format("\n\n" ++
+	      "\t\t              JOGO DA VELHA BAM \n\n"++
+	      "\t\t      Autores: Mario, Rodrigo, Anderson \n\n"),
+
+    io:format("Selecione o Tipo de interface:\n" ++
+	      "(1) Interface texto\n" ++
+	      "(2) Interface grafica\n\n"),
+
+    case io:fread("Opcao: ", "~d") of
+	{ok, [1]} ->
+	    bam_front:start(text_ui);
+	{ok, [2]} ->
+	    bam_front:start(graf_ui);
+	{ok, _ } ->
+	    io:format("OPCAO INVALIDA!\n\n"),
+	    sel_ui();
+
+	{error, _ } ->
+	    io:format("Digite apenas numeros!\n\n"),
+	    sel_ui()
+    end.
+
+check_ui( Opcao ) ->
+    case Opcao of
+	"text_ui" ->
+	    bam_front:start(text_ui);
+	"graf_ui" ->
+	    bam_front:start(graf_ui);
+	_ ->
+	    io:format("Parametros errados!\n" ++
+		      "e# text_ui   -   modo texto\n" ++
+		      "e# graf_ui   -   modo grafico\n")
+    end.

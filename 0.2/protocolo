@@ -1,0 +1,52 @@
+bam_ui  ->  bam_ctrl
+
+init():
+ - {bam_ui, sair}
+
+sel_oponente():
+- {bam_ui, oponente, humano}
+- {bam_ui, oponente, robo}
+
+ins_nome():
+- {bam_ui, nomes, Nomes}
+   Nomes = { Nome1, Nome2 }
+   Nome1, Nome2 = string()
+
+sel_nivel():
+- {bam_ui, nivel, Nivel}
+   Nivel = facil | intermediario | dificil
+
+nv_partida():
+- {bam_ui, nv_partida}
+
+ativo():
+- {bam_ui, jogada, Jogada}
+  Jogada = integer() = 1..9
+- {bam_ui, reiniciar_jogo}
+- {bam_ui, reiniciar_partida}
+
+
+bam_ctrl -> bam_ui
+
+- {bam_ctrl, oponente, ok}
+- {bam_ctrl, oponente, erro}
+- {bam_ctrl, nomes, ok}
+- {bam_ctrl, sel_nivel, ok}
+- {bam_ctrl, sel_nivel, erro}
+- {bam_ctrl, nv_partida, ok}
+- {bam_ctrl, Tabuleiro, {Nome1, Nome2}, Estado}
+
+Tabuleiro = { L1, L2, L3 }
+LN = { PN1, PN2, PN3 }
+PNX = o | x | vazio
+
+Estado = jogando | empate | vitoria
+
+Exemplo de tabuleiro e estado
+T = {
+	{ o, x, vz },
+	{ x, o, vz },
+	{ x, x, vz },
+    }
+
+Estado = jogando

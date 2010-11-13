@@ -1,10 +1,6 @@
 NOTAS:
 
-Mudar estrutura:
-Os estados do tui mudarão para:
-se for oponente humano -> ins_nomes
-se for oponente robo   -> ins_nomes -> sel_nivel
-
-Remover confirmação (Envio de msg de confirmação do ctrl) de:
-ins_nomes
-sel_nivel
+prox passos: 
+bam_tui:sair()
+bam_tui:ativo()
+bam_ctrl:ativo_hum()

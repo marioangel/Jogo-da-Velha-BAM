@@ -71,6 +71,31 @@ Why:  verificar se tudo o que foi feito está correto
 Who:  Todos
 How:  reunir, testar, discutir novas ideias
 
+What: tui:nv_partida
+Why:  iniciar uma nova partida (linhas iniciais)
+Who:  Mário
+How:  N/A
+
+What: desenhar esquema do bam_ctrl
+Why:  ter uma ideia geral do funcionamento desse módulo
+Who:  Anderson
+How:  Desenhar um diagrama dos estados assumidos pelo processo
+
+Sábado - 13/11
+
+What: bam_tui:ativo - verificar estados do jogo
+Why:  dependendo do estado, pode finalizar a partida
+      ou continuar a jogar
+Who:  Mário
+How:  verificar o estado do jogo, direcionar a tui
+
+What: bam_tui:ativo - imprimir tabuleiro
+Why:  permitir jogar
+Who:  Anderson
+How:  receber as variáveis e imprimir o tabuleiro
+
+Domingo - 14/11
+
 What: rediscutir casos de uso e planejamento
 Why:  após início da implementação, notamos
       que é preciso refatorar os requisitos
@@ -82,12 +107,28 @@ How:  Discussão em grupo, remontagem dos
 What: organizar as versões
 Why:  definir bem o que fazer e garantir
       a funcionalidade de cada parte
-Who:  Rodrigo
+Who:  Todos
 How:  verificar o que já foi feito e definir o que
       precisa ser feito
 
-What: interface da partida humano x humano
-Why:  fazer a versão inicial do jogo da velha
-Who:  Anderson e Mário
-How:  desenhar tabuleiro, fazer jogadas e receber
-      resultados, exibindo-os na tela
+What: fazer entidade
+Why:  tratar das jogadas
+Who:  Rodrigo
+How:  receber o tabuleiro e jogada, fazer um "parse"
+      para determinar próximo estado do jogo
+
+What: controle:ativo
+Why:  concluir humano x humano
+Who:  Anderson
+How:  receber do tui as jogadas e tratá-las
+
+What: lógica da máquina
+Why:  permitir jogar humano x computador
+Who:  Todos
+How:  gerar uma jogada aleatória e jogar
+
+What: finalizar o jogo
+Why:  finalizar o projeto
+Who:  Todos
+How:  testar, refatorar, realizar todas as checagens
+      necessárias
