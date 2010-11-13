@@ -147,10 +147,102 @@ nv_partida() ->
 	     ativo()
     end.
 
+%%-----------------------------------------------------------------------------
+%%sair()
+%%   
+%% Permite jogar uma partida no jogo da velha BAM
+%% FUNCAO INCOMPLETA (APENAS TRATAMENTO DO ESTADO ATUAL DO JOGO)
 ativo() ->
-    ok.
+	case Estado of
+	    "jogando" ->
+		Jogada = io:fread("Qual posicao deseja jogar:" ,"~d"),
+		case Jogada of
+		    {ok,[1]}->
+			bam_ctrl ! {bam_ui, jogada, Jogada},
+			ativo();
+		    {ok,[2]}->
+			bam_ctrl ! {bam_ui, jogada, Jogada},
+			ativo();
+		    {ok,[3]}->
+			bam_ctrl ! {bam_ui, jogada, Jogada},
+			ativo();
+		    {ok,[4]}->
+			bam_ctrl ! {bam_ui, jogada, Jogada},
+			ativo();
+		    {ok,[5]}->
+			bam_ctrl ! {bam_ui, jogada, Jogada},
+			ativo();
+		    {ok,[6]}->
+			bam_ctrl ! {bam_ui, jogada, Jogada},
+			ativo();
+		    {ok,[7]}->
+			bam_ctrl ! {bam_ui, jogada, Jogada},
+			ativo();
+		    {ok,[8]}->
+			bam_ctrl ! {bam_ui, jogada, Jogada},
+			ativo();
+		    {ok,[9]}->
+			bam_ctrl ! {bam_ui, jogada, Jogada},
+			ativo();
+		    {ok, _}->
+			io:format("\nOPCAO INVALIDA\n"),
+			ativo();
+		    {error, _}->
+			io:format("\nDIGITE APENAS NUMEROS\n"),
+			ativo()
+		end;
+
+	    "empate" ->
+		io:format("\nSeu partida VELHOU\n\n"++
+			      "Menu BAM\n"++
+			      "(1)Menu Principal\n"++
+			      "(2)Reiniciar Partida\n"),
+		Opcao = io:fread("O que deseja fazer :" ,"~d"),
+		case Opcao of
+		    {ok,[1]} ->
+			bam_ctrl ! {bam_ui, reiniciar_jogo},
+			init();
+		    {ok,[2]} ->
+			bam_ctrl ! {bam_ui, reiniciar_partida},
+			ativo();
+		    {ok, _} ->
+			io:format("\nOPCAO INVALIDA\n"),
+			iativo();
+		    {error, _}->
+			io:format("\nDIGITE APENAS NUMEROS\n"),
+			ativo()
+		end;
+
+
+	    "fim" ->
+		io:format("\nSeu partida TERMINOU\n\n"++
+			      "Menu BAM\n"++
+			      "(1)Menu Principal\n"++
+			      "(2)Reiniciar Partida\n"),
+		Opcao = io:fread("O que deseja fazer :" ,"~d"),
+		case Opcao of
+		    {ok,[1]} ->
+			bam_ctrl ! {bam_ui, reiniciar_jogo},
+			ok;%init();
+		    {ok,[2]} ->
+			bam_ctrl ! {bam_ui, reiniciar_partida},
+			ok;%ativo();
+		    {ok, _} ->
+			io:format("\nOPCAO INVALIDA\n"),
+			ativo();
+		    {error, _}->
+			io:format("\nDIGITE APENAS NUMEROS\n"),
+			ativo()
+		end
+
+	end.
+
+%%-----------------------------------------------------------------------------
+%%sair()
+%%   
+%% Sai do jogo
 
 sair() ->
 
-    io:format("\n\nSaindo do jogo da velha\n"),
+    io:format("\n\nSaindo do jogo da velha BAM\n"),
     bam_ctrl ! {bam_ui, sair}.
