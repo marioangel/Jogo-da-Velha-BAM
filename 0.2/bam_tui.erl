@@ -240,7 +240,7 @@ ativo() ->
 		    end
 
 	    end;
-	{bam_ctrl, partida, {erro,Why,Jogo}} -> %%falta implementar o erro
+	{bam_ctrl, partida, {erro,Why,Jogo}} -> 
 	    case Why of
 		pos_fora_tab ->
 		    io:format("Posicao fora das definidas no tabuleiro!!"),
