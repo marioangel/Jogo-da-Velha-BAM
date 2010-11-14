@@ -81,7 +81,7 @@ sel_oponente() ->
 %%   
 %% Permitir inserir o nome dos jogadores
 
-ins_nome( {vazio,vazio} ) ->
+ins_nome( { vazio, vazio} ) ->
 	    io:format("Digite o Nome dos jogadores...~n"),
 	    
 	    {ok,Nome1} = io:fread("Jogador 1: ","~s"),
@@ -94,7 +94,7 @@ ins_nome( {vazio,vazio} ) ->
 		    nv_partida()
 	    end;
 
-ins_nome( {computador,vazio} ) ->
+ins_nome( { computador, vazio} ) ->
 
 	    io:format("Digite o Nome do jogador...~n"),
 	    
@@ -152,90 +152,93 @@ nv_partida() ->
 %%   
 %% Permite jogar uma partida no jogo da velha BAM
 %% FUNCAO INCOMPLETA (APENAS TRATAMENTO DO ESTADO ATUAL DO JOGO)
+
 ativo() ->
-	case Estado of
-	    "jogando" ->
-		Jogada = io:fread("Qual posicao deseja jogar:" ,"~d"),
-		case Jogada of
-		    {ok,[1]}->
-			bam_ctrl ! {bam_ui, jogada, Jogada},
-			ativo();
-		    {ok,[2]}->
-			bam_ctrl ! {bam_ui, jogada, Jogada},
-			ativo();
-		    {ok,[3]}->
-			bam_ctrl ! {bam_ui, jogada, Jogada},
-			ativo();
-		    {ok,[4]}->
-			bam_ctrl ! {bam_ui, jogada, Jogada},
-			ativo();
-		    {ok,[5]}->
-			bam_ctrl ! {bam_ui, jogada, Jogada},
-			ativo();
-		    {ok,[6]}->
-			bam_ctrl ! {bam_ui, jogada, Jogada},
-			ativo();
-		    {ok,[7]}->
-			bam_ctrl ! {bam_ui, jogada, Jogada},
-			ativo();
-		    {ok,[8]}->
-			bam_ctrl ! {bam_ui, jogada, Jogada},
-			ativo();
-		    {ok,[9]}->
-			bam_ctrl ! {bam_ui, jogada, Jogada},
-			ativo();
-		    {ok, _}->
-			io:format("\nOPCAO INVALIDA\n"),
-			ativo();
-		    {error, _}->
-			io:format("\nDIGITE APENAS NUMEROS\n"),
-			ativo()
-		end;
+    receive 
+	{bam_ctrl, partida, {ok, Jogo}} ->
+	    case Jogo of
+		{ Tabuleiro, {Nome1, Nome2}, Estado} ->
+	    monta_tabuleiro(Tabuleiro),
+	    case Estado of
+		{ jogando, Jog} ->
+		    Jogada = io:fread("Qual posicao deseja jogar:" ,"~d"),
+		    case Jogada of
+			{ok, [N]}->
+			    bam_ctrl ! {bam_ui, jogada, Jogada},
+			    ativo();			    
+			{error, _}->
+			    io:format("\nDIGITE APENAS NUMEROS\n"),
+			    io:fread("...Pressione <ENTER> para continuar...",""),
+			    ativo()
+		    end;
 
-	    "empate" ->
-		io:format("\nSeu partida VELHOU\n\n"++
+		"empate" ->
+		    io:format("\nSeu partida VELHOU\n\n"++
 			      "Menu BAM\n"++
 			      "(1)Menu Principal\n"++
 			      "(2)Reiniciar Partida\n"),
-		Opcao = io:fread("O que deseja fazer :" ,"~d"),
-		case Opcao of
-		    {ok,[1]} ->
-			bam_ctrl ! {bam_ui, reiniciar_jogo},
-			init();
-		    {ok,[2]} ->
-			bam_ctrl ! {bam_ui, reiniciar_partida},
-			ativo();
-		    {ok, _} ->
-			io:format("\nOPCAO INVALIDA\n"),
-			iativo();
-		    {error, _}->
-			io:format("\nDIGITE APENAS NUMEROS\n"),
-			ativo()
-		end;
+		    Opcao = io:fread("O que deseja fazer :" ,"~d"),
+		    case Opcao of
+			{ok,[1]} ->
+			    bam_ctrl ! {bam_ui, reiniciar_jogo},
+			    init();
+			{ok,[2]} ->
+			    bam_ctrl ! {bam_ui, reiniciar_partida},
+			    ativo();
+			{ok, _} ->
+			    io:format("\nOPCAO INVALIDA\n"),
+			    iativo();
+			{error, _}->
+			    io:format("\nDIGITE APENAS NUMEROS\n"),
+			    ativo()
+		    end;
 
 
-	    "fim" ->
-		io:format("\nSeu partida TERMINOU\n\n"++
+		"fim" ->
+		    io:format("\nSeu partida TERMINOU\n\n"++
 			      "Menu BAM\n"++
 			      "(1)Menu Principal\n"++
 			      "(2)Reiniciar Partida\n"),
-		Opcao = io:fread("O que deseja fazer :" ,"~d"),
-		case Opcao of
-		    {ok,[1]} ->
-			bam_ctrl ! {bam_ui, reiniciar_jogo},
-			ok;%init();
-		    {ok,[2]} ->
-			bam_ctrl ! {bam_ui, reiniciar_partida},
-			ok;%ativo();
-		    {ok, _} ->
-			io:format("\nOPCAO INVALIDA\n"),
-			ativo();
-		    {error, _}->
-			io:format("\nDIGITE APENAS NUMEROS\n"),
-			ativo()
-		end
+		    Opcao = io:fread("O que deseja fazer :" ,"~d"),
+		    case Opcao of
+			{ok,[1]} ->
+			    bam_ctrl ! {bam_ui, reiniciar_jogo},
+			    ok;%init();
+			{ok,[2]} ->
+			    bam_ctrl ! {bam_ui, reiniciar_partida},
+			    ok;%ativo();
+			{ok, _} ->
+			    io:format("\nOPCAO INVALIDA\n"),
+			    ativo();
+			{error, _}->
+			    io:format("\nDIGITE APENAS NUMEROS\n"),
+			    ativo()
+		    end
 
-	end.
+	    end
+      end.
+
+%%-----------------------------------------------------------------------------
+%% monta_tabuleiro()
+%%   
+%% Monta o tabuleiro do jogo da velha BAM
+%% 
+
+monta_tabuleiro(Tabuleiro)->
+    {{P11,P12,P13},{P21,P22,P23},{P31,P32,P33}} = Tabuleiro,
+    io:format("_"++transf(P11)++"_|_"++transf(P12)++"_|_"++transf(P13)++"_\n"++
+	      "_"++transf(P21)++"_|_"++transf(P22)++"_|_"++transf(P23)++"_\n"++
+	      " "++transf(P31)++" | "++transf(P32)++" | "++transf(P33)++" \n").
+
+transf(Posicao) ->
+    case Posicao
+	x ->
+	    "x";
+	o ->
+	    "o";
+	vz ->
+	    "_"
+    end.
 
 %%-----------------------------------------------------------------------------
 %%sair()
