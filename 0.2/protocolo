@@ -20,7 +20,7 @@ nv_partida():
 - {bam_ui, nv_partida}
 
 ativo():
-- {bam_ui, jogada, {Posicao, Jog}}
+- {bam_ui, jogada, {Jogada, Jog}}
   Jogada = integer() = 1..9
 - {bam_ui, reiniciar_jogo}
 - {bam_ui, reiniciar_partida}
@@ -39,9 +39,9 @@ bam_ctrl -> bam_ui
 
 Why = Mensagem de erro
 Jogo = { Tabuleiro, { Nome1, Nome2 }, Estado } } }
-Tabuleiro = { L1, L2, L3 }
-LN = { PN1, PN2, PN3 }
-PNX = o | x | vazio
+Tabuleiro = [ L1, L2, L3 ]
+LN = [ PN1, PN2, PN3 ]
+PNX = o | x | vz
 
 Estado = {jogando, Jog} | empate | {vitoria, Jog}
 
