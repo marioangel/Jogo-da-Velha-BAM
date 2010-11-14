@@ -20,7 +20,7 @@ nv_partida():
 - {bam_ui, nv_partida}
 
 ativo():
-- {bam_ui, jogada, Jogada}
+- {bam_ui, jogada, {Jogada, Jog}}
   Jogada = integer() = 1..9
 - {bam_ui, reiniciar_jogo}
 - {bam_ui, reiniciar_partida}
@@ -34,13 +34,21 @@ bam_ctrl -> bam_ui
 - {bam_ctrl, sel_nivel, ok}
 - {bam_ctrl, sel_nivel, erro}
 - {bam_ctrl, nv_partida, ok}
-- {bam_ctrl, Tabuleiro, {Nome1, Nome2}, Estado}
+- {bam_ctrl, partida, {ok, Jogo}}
+- {bam_ctrl, partida, {erro, Why, Jogo}}
 
+Why = Mensagem de erro
+Jogo = { Tabuleiro, { Nome1, Nome2 }, Estado } } }
 Tabuleiro = { L1, L2, L3 }
 LN = { PN1, PN2, PN3 }
 PNX = o | x | vazio
 
-Estado = jogando | empate | vitoria
+Estado = {jogando, Jog} | empate | {vitoria, Jog}
+
+Jog = jog1 | jog2 | computador
+
+jog1 - x
+jog2 - o
 
 Exemplo de tabuleiro e estado
 T = {
