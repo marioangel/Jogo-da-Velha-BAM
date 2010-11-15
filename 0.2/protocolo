@@ -37,10 +37,15 @@ bam_ctrl -> bam_ui
 - {bam_ctrl, partida, {ok, Jogo}}
 - {bam_ctrl, partida, {erro, Why, Jogo}}
 
+
+
 Why = Mensagem de erro
+
+Why = pos_fora_tab | pos_ocupada
+
 Jogo = { Tabuleiro, { Nome1, Nome2 }, Estado } } }
-Tabuleiro = { L1, L2, L3 }
-LN = { PN1, PN2, PN3 }
+Tabuleiro = [ L1, L2, L3 ]
+LN = [ PN1, PN2, PN3 ]
 PNX = o | x | vz
 
 Estado = {jogando, Jog} | empate | {vitoria, Jog}
