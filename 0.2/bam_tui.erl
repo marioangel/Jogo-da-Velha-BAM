@@ -166,7 +166,7 @@ ativo() ->
 	{bam_ctrl, partida, {ok, Jogo}} ->
 	    { Tabuleiro, {Nome1, Nome2}, Estado} = Jogo,
 	    monta_tabuleiro(Tabuleiro),
-	
+
 	    case Estado of
 		{ jogando, computador} ->
 		    io:format(os:cmd(clear)),
@@ -178,7 +178,7 @@ ativo() ->
 			       jog2 -> Nome2
 			   end,
 		    Jogada = io:fread("Jogador: "++Nome++
-				      "\nEm qual posicao deseja jogar:" ,"~d"),
+					  "\nEm qual posicao deseja jogar:" ,"~d"),
 		    case Jogada of
 			{ok, [Numero]}->
 			    bam_ctrl ! {bam_ui, jogada, {Numero,Jog}},
@@ -190,13 +190,13 @@ ativo() ->
 			    io:format(os:cmd(clear)),
 			    ativo()
 		    end;
-	     
+
 
 		empate ->
 		    io:format("\nSeu partida VELHOU\n\n"++
-			      "Menu BAM\n"++
-			      "(1)Menu Principal\n"++
-			      "(2)Reiniciar Partida\n"),
+				  "Menu BAM\n"++
+				  "(1)Menu Principal\n"++
+				  "(2)Reiniciar Partida\n"),
 		    Opcao = io:fread("O que deseja fazer :" ,"~d"),
 		    case Opcao of
 			{ok,[1]} ->
@@ -220,11 +220,16 @@ ativo() ->
 		    end;
 
 
-		fim ->
+		{vitoria,Jog} ->
+		    Nome = case Jog of
+			       jog1 -> Nome1;
+			       jog2 -> Nome2
+			   end,
 		    io:format("\nSua partida TERMINOU\n\n"++
-			      "Menu BAM\n"++
-			      "(1)Menu Principal\n"++
-			      "(2)Reiniciar Partida\n"),
+				  "O jogador "++ Nome ++" GANHOU o/o/o/ \n\n"++
+				  "Menu BAM\n"++
+				  "(1)Menu Principal\n"++
+				  "(2)Reiniciar Partida\n"),
 		    Opcao = io:fread("O que deseja fazer :" ,"~d"),
 		    case Opcao of
 			{ok,[1]} ->
@@ -255,14 +260,14 @@ ativo() ->
 		    io:fread("...Pressione <ENTER> para continuar...",""),
 		    io:format(os:cmd(clear)),
 		    ativo();
-		
+
 		pos_ocupada ->
 		    io:format("Posicao ja ocupada!!"),
 		    io:fread("...Pressione <ENTER> para continuar...",""),
 		    io:format(os:cmd(clear)),
 		    ativo()
 	    end
-      end.
+    end.
 
 %%-----------------------------------------------------------------------------
 %% monta_tabuleiro()
@@ -271,10 +276,18 @@ ativo() ->
 %% 
 
 monta_tabuleiro(Tabuleiro)->
+    io:format(
+      "\nUSE O TECLADO NUMERICO \n\n"++
+	  "\t_1_|_2_|_3_ \n"++
+	  "\t_4_|_5_|_6_ \n"++
+	  "\t 7 | 8 | 9  \n"++
+	  "\n"++
+	  "Para jogar digite a posicao desejada conforme o esquema acima."	
+     ),
     [[P11,P12,P13],[P21,P22,P23],[P31,P32,P33]] = Tabuleiro,
-    io:format("_"++transf(P11)++"_|_"++transf(P12)++"_|_"++transf(P13)++"_\n"++
-	      "_"++transf(P21)++"_|_"++transf(P22)++"_|_"++transf(P23)++"_\n"++
-	      " "++transf(P31)++" | "++transf(P32)++" | "++transf(P33)++" \n").
+    io:format("\n\n_"++transf(P11)++"_|_"++transf(P12)++"_|_"++transf(P13)++"_\n"++
+		  "_"++transf(P21)++"_|_"++transf(P22)++"_|_"++transf(P23)++"_\n"++
+		  " "++transf(P31)++" | "++transf(P32)++" | "++transf(P33)++" \n").
 
 transf(Posicao) ->
     case Posicao of

@@ -7,6 +7,7 @@ main ( Args ) ->
     end.
 
 sel_ui() ->
+    io:format(os:cmd(clear)),    
     io:format("\n\n" ++
 	      "\t\t              JOGO DA VELHA BAM \n\n"++
 	      "\t\t      Autores: Mario, Rodrigo, Anderson \n\n"),
