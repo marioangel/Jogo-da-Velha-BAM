@@ -1,20 +1,20 @@
 -module(bam_ttt).
-%-export([ jogar/2 ]).
+%-export([ jogar/3, jogar_pc/1 ]).
+
 -compile(export_all).
 
 %% jog1 -> x
 %% jog2 -> o
 
-jogar( Tabuleiro, {Jogada, Jog} ) ->
+jogar( Tabuleiro, {Jogada, Jog}, {Jog1, Jog2} ) ->
     Tab_list = extrair_pos (Tabuleiro),
     case Jog of
 	jog1 ->
 	    Nv_pos = x,
-	    Nv_jog = jog2;
+	    Prox_jog = Jog2;
 	jog2 ->
 	    Nv_pos = o,
-	    Nv_jog = jog1
-
+	    Prox_jog = Jog1
 	end,
 
     case faz_jogada(Tab_list, {Jogada, Nv_pos}) of
@@ -29,11 +29,38 @@ jogar( Tabuleiro, {Jogada, Jog} ) ->
 		erro ->
 		    case checar_empate ( Nv_tab_list ) of
 			true  -> {ok, Nv_Tab, empate};
-			false -> {ok, Nv_Tab, {jogando, Nv_jog}}
+			false -> {ok, Nv_Tab, {jogando, Prox_jog}}
 		    end
 	    end
     end.
     
+
+jogar_pc( Tabuleiro ) ->
+    Tab_list = extrair_pos (Tabuleiro),
+
+    Prox_jog = jog1,
+    Jogada = gerar_jogada_pc( Tab_list ),
+
+    {ok, Nv_tab_list} = faz_jogada( Tab_list, {Jogada, o} ),
+
+    Nv_Tab = montar_tab( Nv_tab_list ),
+
+    case checar_vitoria ( Nv_Tab ) of
+	{ok, jog1} ->
+	    {ok, Nv_Tab, {vitoria, jog1}};
+	{ok, jog2} ->
+	    {ok, Nv_Tab, {vitoria, computador}};
+
+	erro ->
+	    case checar_empate ( Nv_tab_list ) of
+		true  -> {ok, Nv_Tab, empate};
+		false -> {ok, Nv_Tab, {jogando, Prox_jog}}
+	    end
+    end.
+
+gerar_jogada_pc( Tab ) -> gerar_jogada_pc( Tab, 1 ).
+gerar_jogada_pc( [vz|_], Jogada ) -> Jogada;
+gerar_jogada_pc( [_| T], N ) -> gerar_jogada_pc( T, N+1 ).
 
 faz_jogada( Tab_list, {N, Nv_pos} ) ->
     faz_jogada( Tab_list, {N, Nv_pos}, [] ).

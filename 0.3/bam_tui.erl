@@ -64,7 +64,7 @@ sel_oponente() ->
 	    bam_ctrl ! {bam_ui, oponente, humano};
 	
 	{ok,[2]} ->
-	    bam_ctrl ! {bam_ui, oponente, robo};
+	    bam_ctrl ! {bam_ui, oponente, computador};
 
 	{ok, _} ->
 	    io:format("\nOPCAO INVALIDA\n"),
@@ -83,8 +83,8 @@ sel_oponente() ->
     receive
 	{bam_ctrl, oponente, ok} ->
 	    case Opcao of
-		1 -> ins_nome({vazio,vazio});
-		2 -> sel_nivel()
+		{ok, [1]} -> ins_nome({vazio,vazio});
+		{ok, [2]} -> sel_nivel()
 	    end;
 	{bam_ctrl, oponente, erro} ->
 	    io:format("Erro na opcao do oponente desejado!~n"),
@@ -115,9 +115,9 @@ ins_nome( { computador, vazio} ) ->
 
     io:format("Digite o Nome do jogador~n"),
 
-    {ok,Nome} = io:fread("Jogador 1: ","~s"),
+    {ok,[Nome]} = io:fread("Jogador 1: ","~s"),
 
-    bam_ctrl ! {bam_ui,ins_nome,nome,{Nome,computador}},
+    bam_ctrl ! {bam_ui, nomes,{Nome,computador}},
 
     receive
 	{bam_ctrl,nomes,ok} ->
@@ -255,10 +255,11 @@ ativo() ->
 		{vitoria,Jog} ->
 		    Nome = case Jog of
 			       jog1 -> Nome1;
-			       jog2 -> Nome2
+			       jog2 -> Nome2;
+			       computador -> atom_to_list(Nome2)
 			   end,
 		    io:format("\nSua partida TERMINOU\n\n"++
-				  "O jogador "++ Nome ++" GANHOU o/o/o/ \n\n"++
+				  "O jogador "++ Nome ++" GANHOU \\o/ \\o/ \\o/ \n\n"++
 				  "Menu BAM\n"++
 				  "(1)Menu Principal\n"++
 				  "(2)Reiniciar Partida\n"),
