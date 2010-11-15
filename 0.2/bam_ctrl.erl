@@ -40,6 +40,10 @@ set_oponente() ->
 
 	{bam_ui, reiniciar_jogo} ->
 	    start();
+
+	{bam_ui, sair} ->
+	    die;
+
 	X ->
 	    io:format("INESPERADO:\n" ++
 		      "bam_ctrl:set_oponente\n" ++
@@ -59,7 +63,7 @@ set_nome( Tipo_oponente ) ->
 	    bam_ui ! {bam_ctrl, nomes, ok},
 
 	    case Tipo_oponente of
-		humano -> inicia_part( Tipo_oponente, Nomes );
+		humano -> inicia_partida( Tipo_oponente, Nomes );
 		robo -> set_nivel ( Nomes );
 		X ->
 		    io:format("INESPERADO:\n" ++
@@ -81,7 +85,7 @@ set_nome( Tipo_oponente ) ->
 set_nivel( Nomes ) ->
     receive
 	{bam_ui, nivel, Nivel} ->
-	    inicia_part( {robo, Nivel}, Nomes )
+	    inicia_partida( {robo, Nivel}, Nomes )
     end.
 
 %%-----------------------------------------------------------------------------
@@ -89,7 +93,7 @@ set_nivel( Nomes ) ->
 %%    -> determina condições iniciais (tabuleiro, estado)
 %%    -> vai para estado ativo
 
-inicia_part( Tipo_oponente, Nomes ) ->
+inicia_partida( Tipo_oponente, Nomes ) ->
     Tabuleiro = [ [vz, vz, vz],
 		  [vz, vz, vz],
 		  [vz, vz, vz]
@@ -130,11 +134,19 @@ inicia_part( Tipo_oponente, Nomes ) ->
 %% Estado = {jogando, Jog} | empate | {vitoria, Jog}
 %% Jog = jog1 | jog2 | computador
 
-ativo_hum( _, empate, Nomes) -> fim_partida (Nomes);
-ativo_hum( _, {vitoria,_}, Nomes) -> fim_partida (Nomes);
-
 ativo_hum( Tabuleiro, Estado, Nomes ) ->
     receive
+	{bam_ui, reiniciar_jogo} ->
+	    start();
+
+	{bam_ui, reiniciar_partida} ->	   
+	    inicia_partida( humano, Nomes );	
+
+	{bam_ui, partida, refresh} ->
+	    Jogo = {Tabuleiro, Nomes, Estado},
+	    bam_ui ! {bam_ctrl, partida, {ok, Jogo}},
+	    ativo_hum( Tabuleiro, Estado, Nomes );
+
 	{bam_ui, jogada, {Posicao, _}} when (Posicao > 9) or (Posicao == 0)->
 	    Jogo = {Tabuleiro, Nomes, Estado},
 	    bam_ui ! {bam_ctrl, partida, {erro, pos_fora_tab, Jogo}},
@@ -148,25 +160,9 @@ ativo_hum( Tabuleiro, Estado, Nomes ) ->
 		    ativo_hum( Tabuleiro, Estado, Nomes );
 
 		{ok, Nv_Tabuleiro, Nv_Estado} ->
-		    Jogo = {Nv_Tabuleiro, Nomes, Nv_Estado},
-		    bam_ui ! {bam_ctrl, partida, {ok, Jogo}},
 		    ativo_hum( Nv_Tabuleiro, Nv_Estado, Nomes )
 	    end
     end.
 
 ativo_pc(_Tabuleiro, _Estado, _Nomes, _Nivel) ->
     ok.
-
-fim_partida(_Nomes) ->    
-    receive
-	{bam_ui, reiniciar_jogo} ->
-	    start();
-	{bam_ui, reiniciar_partida} ->	   
-	    ok;
-%	    ativo_hum( Tabuleiro, Nv_Estado, Nomes );
-
-	X ->
-	    io:format("INESPERADO:\n" ++
-		      "bam_ctrl:ativo_hum\n" ++
-		      "receive fim_partida ->  ~p", [X])
-    end.

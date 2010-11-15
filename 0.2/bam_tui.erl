@@ -183,11 +183,13 @@ ativo() ->
 			{ok, [Numero]}->
 			    bam_ctrl ! {bam_ui, jogada, {Numero,Jog}},
 			    io:format(os:cmd(clear)),
+			    bam_ctrl ! {bam_ui, partida, refresh},
 			    ativo();			    
 			{error, _}->
 			    io:format("\nDIGITE APENAS NUMEROS\n"),
 			    io:fread("...Pressione <ENTER> para continuar...",""),
 			    io:format(os:cmd(clear)),
+			    bam_ctrl ! {bam_ui, partida, refresh},
 			    ativo()
 		    end;
 
@@ -211,11 +213,13 @@ ativo() ->
 			    io:format("\nOPCAO INVALIDA\n"),
 			    io:fread("...Pressione <ENTER> para continuar...",""),
 			    io:format(os:cmd(clear)),
+			    bam_ctrl ! {bam_ui, partida, refresh},
 			    ativo();
 			{error, _}->
 			    io:format("\nDIGITE APENAS NUMEROS\n"),
 			    io:fread("...Pressione <ENTER> para continuar...",""),
 			    io:format(os:cmd(clear)),
+			    bam_ctrl ! {bam_ui, partida, refresh},
 			    ativo()
 		    end;
 
@@ -244,11 +248,13 @@ ativo() ->
 			    io:format("\nOPCAO INVALIDA\n"),
 			    io:fread("...Pressione <ENTER> para continuar...",""),
 			    io:format(os:cmd(clear)),
+			    bam_ctrl ! {bam_ui, partida, refresh},
 			    ativo();
 			{error, _}->
 			    io:format("\nDIGITE APENAS NUMEROS\n"),
 			    io:fread("...Pressione <ENTER> para continuar...",""),
 			    io:format(os:cmd(clear)),
+			    bam_ctrl ! {bam_ui, partida, refresh},
 			    ativo()
 		    end
 
@@ -259,12 +265,14 @@ ativo() ->
 		    io:format("Posicao fora das definidas no tabuleiro!!"),
 		    io:fread("...Pressione <ENTER> para continuar...",""),
 		    io:format(os:cmd(clear)),
+		    bam_ctrl ! {bam_ui, partida, refresh},
 		    ativo();
 
 		pos_ocupada ->
 		    io:format("Posicao ja ocupada!!"),
 		    io:fread("...Pressione <ENTER> para continuar...",""),
 		    io:format(os:cmd(clear)),
+		    bam_ctrl ! {bam_ui, partida, refresh},
 		    ativo()
 	    end
     end.
