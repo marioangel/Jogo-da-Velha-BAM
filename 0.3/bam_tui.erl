@@ -259,7 +259,7 @@ ativo() ->
 			       computador -> atom_to_list(Nome2)
 			   end,
 		    io:format("\nSua partida TERMINOU\n\n"++
-				  "O jogador "++ Nome ++" GANHOU \\o/ \\o/ \\o/ \n\n"++
+				  "O jogador "++ Nome ++" GANHOU o/o/o/ \n\n"++
 				  "Menu BAM\n"++
 				  "(1)Menu Principal\n"++
 				  "(2)Reiniciar Partida\n"),
