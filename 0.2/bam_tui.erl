@@ -137,9 +137,15 @@ sel_nivel() ->
 	{ok,[1]} -> bam_ctrl ! {bam_ui, nivel, facil},
 		    ins_nome({computador,vazio});
 	{ok,[2]} -> bam_ctrl ! {bam_ui, nivel, intermediario},
-		    ins_nome({computador,vazio});
+		    %ins_nome({computador,vazio});
+		    io:format("Este nivel nao esta disponivel a esta versao"),
+		    sel_nivel();
+
 	{ok,[3]} -> bam_ctrl ! {bam_ui, nivel, dificil},
-		    ins_nome({computador,vazio});
+		    %ins_nome({computador,vazio});
+		    io:format("Este nivel nao esta disponivel a esta versao"),
+		    sel_nivel();
+
 	{ok, _} -> io:format("\nOPCAO INVALIDA\n"++
 			     "TENTE NOVAMENTE\n\n"),
 		   sel_nivel()
@@ -299,9 +305,9 @@ monta_tabuleiro(Tabuleiro)->
 	  "Para jogar digite a posicao desejada conforme o esquema acima."	
      ),
     [[P11,P12,P13],[P21,P22,P23],[P31,P32,P33]] = Tabuleiro,
-    io:format("\n\n_"++transf(P11)++"_|_"++transf(P12)++"_|_"++transf(P13)++"_\n"++
-		  "_"++transf(P21)++"_|_"++transf(P22)++"_|_"++transf(P23)++"_\n"++
-		  " "++transf(P31)++" | "++transf(P32)++" | "++transf(P33)++" \n").
+    io:format("\n\n\t_"++transf(P11)++"_|_"++transf(P12)++"_|_"++transf(P13)++"_\n"++
+		  "\t_"++transf(P21)++"_|_"++transf(P22)++"_|_"++transf(P23)++"_\n"++
+		  "\t "++transf(P31)++" | "++transf(P32)++" | "++transf(P33)++" \n").
 
 transf(Posicao) ->
     case Posicao of
