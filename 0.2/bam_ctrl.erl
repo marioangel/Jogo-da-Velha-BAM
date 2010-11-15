@@ -94,6 +94,7 @@ inicia_part( Tipo_oponente, Nomes ) ->
 		  [vz, vz, vz],
 		  [vz, vz, vz]
 		 ],
+
     Estado = {jogando, jog1},
     {Nome1, Nome2} = Nomes,
 
@@ -106,7 +107,9 @@ inicia_part( Tipo_oponente, Nomes ) ->
 		      "receive   ->  ~p", [X])
     end,
 
-    bam_ui ! {bam_ctrl, partida,{ok,{ Tabuleiro, {Nome1, Nome2}, Estado }} },
+    Jogo = { Tabuleiro, {Nome1, Nome2}, Estado },
+
+    bam_ui ! {bam_ctrl, partida, {ok, Jogo} }, 
 
     case Tipo_oponente of
 	humano        -> ativo_hum(Tabuleiro, Estado, Nomes);
@@ -122,7 +125,7 @@ inicia_part( Tipo_oponente, Nomes ) ->
 %%
 %% Tabuleiro = { L1, L2, L3 }
 %% LN = { PN1, PN2, PN3 }
-%% PNX = o | x | vazio
+%% PNX = o | x | vz
 %%
 %% Estado = {jogando, Jog} | empate | {vitoria, Jog}
 %% Jog = jog1 | jog2 | computador
@@ -154,18 +157,13 @@ ativo_hum( Tabuleiro, Estado, Nomes ) ->
 ativo_pc(_Tabuleiro, _Estado, _Nomes, _Nivel) ->
     ok.
 
-fim_partida(Nomes) ->    
+fim_partida(_Nomes) ->    
     receive
 	{bam_ui, reiniciar_jogo} ->
 	    start();
-	{bam_ui, reiniciar_partida} ->
-	    Tabuleiro = { {vazio, vazio, vazio},
-			  {vazio, vazio, vazio},
-			  {vazio, vazio, vazio}
-			},
-	    Nv_Estado = {jogando, jog1},
-	   
-	    ativo_hum( Tabuleiro, Nv_Estado, Nomes );
+	{bam_ui, reiniciar_partida} ->	   
+	    ok;
+%	    ativo_hum( Tabuleiro, Nv_Estado, Nomes );
 
 	X ->
 	    io:format("INESPERADO:\n" ++
