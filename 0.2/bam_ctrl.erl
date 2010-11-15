@@ -90,10 +90,10 @@ set_nivel( Nomes ) ->
 %%    -> vai para estado ativo
 
 inicia_part( Tipo_oponente, Nomes ) ->
-    Tabuleiro = { {vazio, vazio, vazio},
-		  {vazio, vazio, vazio},
-		  {vazio, vazio, vazio}
-		 },
+    Tabuleiro = [ [vz, vz, vz],
+		  [vz, vz, vz],
+		  [vz, vz, vz]
+		 ],
     Estado = {jogando, jog1},
     {Nome1, Nome2} = Nomes,
 
@@ -106,7 +106,7 @@ inicia_part( Tipo_oponente, Nomes ) ->
 		      "receive   ->  ~p", [X])
     end,
 
-    bam_ui ! {bam_ctrl, partida, { Tabuleiro, {Nome1, Nome2}, Estado } },
+    bam_ui ! {bam_ctrl, partida,{ok,{ Tabuleiro, {Nome1, Nome2}, Estado }} },
 
     case Tipo_oponente of
 	humano        -> ativo_hum(Tabuleiro, Estado, Nomes);

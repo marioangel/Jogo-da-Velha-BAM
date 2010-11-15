@@ -22,6 +22,7 @@
 %%init()
 %%Imprime o cabecalho inicial e pergunta se deseja ou nao comecar uma partida 
 init() ->
+    io:format(os:cmd(clear)),
     io:format("\n\n" ++
 	      "\t\t               JOGO DA VELHA BAM \n\n"++
 	      "\t\t      Autores:  Mario, Rodrigo, Anderson \n\n"),
@@ -46,6 +47,7 @@ init() ->
 %% de controle a opcao desejada e esperando um OK
 
 sel_oponente() ->
+    io:format(os:cmd(clear)),
     io:format("\n\nDigite o tipo de oponente desejado:~n~n"),
     io:format("(1) Humano x Humano\n" ++
 	      "(2) Humano x Maquina\n" ++
@@ -82,30 +84,32 @@ sel_oponente() ->
 %% Permitir inserir o nome dos jogadores
 
 ins_nome( { vazio, vazio} ) ->
-	    io:format("Digite o Nome dos jogadores...~n"),
-	    
-	    {ok,Nome1} = io:fread("Jogador 1: ","~s"),
-	    {ok,Nome2} = io:fread("Jogador 2: ","~s"),
-	    
-	    bam_ctrl ! {bam_ui, nomes, {Nome1,Nome2}},
-	    
-	    receive
-		{bam_ctrl, nomes, ok} ->
-		    nv_partida()
-	    end;
+
+    io:format(os:cmd(clear)),
+    io:format("Digite o Nome dos jogadores...~n"),
+
+    {ok,Nome1} = io:fread("Jogador 1: ","~s"),
+    {ok,Nome2} = io:fread("Jogador 2: ","~s"),
+
+    bam_ctrl ! {bam_ui, nomes, {Nome1,Nome2}},
+
+    receive
+	{bam_ctrl, nomes, ok} ->
+	    nv_partida()
+    end;
 
 ins_nome( { computador, vazio} ) ->
 
-	    io:format("Digite o Nome do jogador...~n"),
-	    
-	    {ok,Nome} = io:fread("Jogador 1: ","~s"),
-	    
-	    bam_ctrl ! {bam_ui,ins_nome,nome,{Nome,"Computador"}},
-	    
-	    receive
-		{bam_ctrl,nomes,ok} ->
-		    nv_partida()
-	    end.
+    io:format("Digite o Nome do jogador...~n"),
+
+    {ok,Nome} = io:fread("Jogador 1: ","~s"),
+
+    bam_ctrl ! {bam_ui,ins_nome,nome,{Nome,"Computador"}},
+
+    receive
+	{bam_ctrl,nomes,ok} ->
+	    nv_partida()
+    end.
 
 %%-----------------------------------------------------------------------------
 %%sel_nivel()
@@ -113,24 +117,27 @@ ins_nome( { computador, vazio} ) ->
 %% Escolha do nivel do computador    
 
 sel_nivel() ->
-	   io:format(
-	   "Tipos de niveis:\n"++
-	   "(1)Nivel Facil\n"++
-	   "(2)Nivel Intermediario\n"++
-	   "(3)Nivel Dificil\n"),
 
-	   Read = io: fread("Escolha Opcao: ","~d"),
-	   case Read of
-	   	   {ok,[1]} -> bam_ctrl ! {bam_ui, nivel, facil},
-				ins_nome({computador,vazio});
-		   {ok,[2]} -> bam_ctrl ! {bam_ui, nivel, intermediario},
-				ins_nome({computador,vazio});
-		   {ok,[3]} -> bam_ctrl ! {bam_ui, nivel, dificil},
-				ins_nome({computador,vazio});
-		   {ok, _} -> io:format("\nOPCAO INVALIDA\n"++
-				        "TENTE NOVAMENTE\n\n"),
-				sel_nivel()
-	   end.
+    io:format(os:cmd(clear)),	
+    io:format(
+      "Selecione o nivel de sua maquina\n"++
+      "Tipos de niveis:\n"++
+      "(1)Nivel Facil\n"++
+      "(2)Nivel Intermediario\n"++
+      "(3)Nivel Dificil\n"),
+
+    Read = io: fread("Escolha Opcao: ","~d"),
+    case Read of
+	{ok,[1]} -> bam_ctrl ! {bam_ui, nivel, facil},
+		    ins_nome({computador,vazio});
+	{ok,[2]} -> bam_ctrl ! {bam_ui, nivel, intermediario},
+		    ins_nome({computador,vazio});
+	{ok,[3]} -> bam_ctrl ! {bam_ui, nivel, dificil},
+		    ins_nome({computador,vazio});
+	{ok, _} -> io:format("\nOPCAO INVALIDA\n"++
+			     "TENTE NOVAMENTE\n\n"),
+		   sel_nivel()
+    end.
 
 %%-----------------------------------------------------------------------------
 %%nv_partida()
@@ -138,7 +145,8 @@ sel_nivel() ->
 %% Inica uma nova partida
 
 nv_partida() ->
-    io:format("\n\nUMA NOVA PARTIDA SERA INICADA\n\n"),
+    io:format(os:cmd(clear)),
+    io:format("\n\nA PARTIDA SERA INICIADA\n\n"),
     
     bam_ctrl ! {bam_ui, nv_partida},
     
@@ -164,7 +172,7 @@ ativo() ->
 		    io:format(os:cmd(clear)),
 		    ativo();
 
-		{ jogando, Jog}
+		{ jogando, Jog} ->
 		    Nome = case Jog of
 			       jog1 -> Nome1;
 			       jog2 -> Nome2
@@ -173,7 +181,7 @@ ativo() ->
 				      "\nEm qual posicao deseja jogar:" ,"~d"),
 		    case Jogada of
 			{ok, [Numero]}->
-			    bam_ctrl ! {bam_ui, jogada, Jogada},
+			    bam_ctrl ! {bam_ui, jogada, {Numero,Jog}},
 			    io:format(os:cmd(clear)),
 			    ativo();			    
 			{error, _}->
@@ -198,7 +206,7 @@ ativo() ->
 			{ok,[2]} ->
 			    bam_ctrl ! {bam_ui, reiniciar_partida},
 			    io:format(os:cmd(clear)),
-			    ativo();
+			    nv_partida();
 			{ok, _} ->
 			    io:format("\nOPCAO INVALIDA\n"),
 			    io:fread("...Pressione <ENTER> para continuar...",""),
@@ -212,7 +220,7 @@ ativo() ->
 		    end;
 
 
-		"fim" ->
+		fim ->
 		    io:format("\nSua partida TERMINOU\n\n"++
 			      "Menu BAM\n"++
 			      "(1)Menu Principal\n"++
@@ -226,7 +234,7 @@ ativo() ->
 			{ok,[2]} ->
 			    bam_ctrl ! {bam_ui, reiniciar_partida},
 			    io:format(os:cmd(clear)),
-			    ativo();
+			    nv_partida();
 			{ok, _} ->
 			    io:format("\nOPCAO INVALIDA\n"),
 			    io:fread("...Pressione <ENTER> para continuar...",""),
@@ -240,7 +248,7 @@ ativo() ->
 		    end
 
 	    end;
-	{bam_ctrl, partida, {erro,Why,Jogo}} -> 
+	{bam_ctrl, partida, {erro,Why,_}} -> 
 	    case Why of
 		pos_fora_tab ->
 		    io:format("Posicao fora das definidas no tabuleiro!!"),
@@ -252,8 +260,8 @@ ativo() ->
 		    io:format("Posicao ja ocupada!!"),
 		    io:fread("...Pressione <ENTER> para continuar...",""),
 		    io:format(os:cmd(clear)),
-		    ativo();
-		
+		    ativo()
+	    end
       end.
 
 %%-----------------------------------------------------------------------------
@@ -269,7 +277,7 @@ monta_tabuleiro(Tabuleiro)->
 	      " "++transf(P31)++" | "++transf(P32)++" | "++transf(P33)++" \n").
 
 transf(Posicao) ->
-    case Posicao
+    case Posicao of
 	x ->
 	    "x";
 	o ->
