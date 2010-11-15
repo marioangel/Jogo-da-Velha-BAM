@@ -20,6 +20,7 @@ nv_partida():
 - {bam_ui, nv_partida}
 
 ativo():
+- {bam_ui, jogada, computador}
 - {bam_ui, jogada, {Jogada, Jog}}
   Jogada = integer() = 1..9
 - {bam_ui, reiniciar_jogo}

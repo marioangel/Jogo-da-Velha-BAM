@@ -66,10 +66,17 @@ sel_oponente() ->
 	{ok,[2]} ->
 	    bam_ctrl ! {bam_ui, oponente, robo};
 
-	{erro, _} ->	    io:format("\nOPCAO INVALIDA\n"),
-			    io:fread("...Pressione <ENTER> para continuar...",""),
-			    io:format(os:cmd(clear)),
-			    sel_oponente()		
+	{ok, _} ->
+	    io:format("\nOPCAO INVALIDA\n"),
+	    io:fread("...Pressione <ENTER> para continuar...",""),
+	    io:format(os:cmd(clear)),
+	    sel_oponente();		
+	
+	{erro, _} ->	  
+	    io:format("\nOPCAO INVALIDA\n"),
+	    io:fread("...Pressione <ENTER> para continuar...",""),
+	    io:format(os:cmd(clear)),
+	    sel_oponente()		
 
     end,
     
@@ -92,7 +99,7 @@ sel_oponente() ->
 ins_nome( { vazio, vazio} ) ->
 
     io:format(os:cmd(clear)),
-    io:format("Digite o Nome dos jogadores...~n"),
+    io:format("Digite o Nome dos jogadores~n"),
 
     {ok,Nome1} = io:fread("Jogador 1: ","~s"),
     {ok,Nome2} = io:fread("Jogador 2: ","~s"),
@@ -106,7 +113,7 @@ ins_nome( { vazio, vazio} ) ->
 
 ins_nome( { computador, vazio} ) ->
 
-    io:format("Digite o Nome do jogador...~n"),
+    io:format("Digite o Nome do jogador~n"),
 
     {ok,Nome} = io:fread("Jogador 1: ","~s"),
 
@@ -127,28 +134,35 @@ sel_nivel() ->
     io:format(os:cmd(clear)),	
     io:format(
       "Selecione o nivel de sua maquina\n"++
-      "Tipos de niveis:\n"++
-      "(1)Nivel Facil\n"++
-      "(2)Nivel Intermediario\n"++
-      "(3)Nivel Dificil\n"),
+      "Nivel:\n"++
+      "(1) Facil\n"++
+      "(2) Intermediario - (Em Construcao)\n"++
+      "(3) Dificil - (Em Construcao)\n"),
 
     Read = io: fread("Escolha Opcao: ","~d"),
     case Read of
-	{ok,[1]} -> bam_ctrl ! {bam_ui, nivel, facil},
-		    ins_nome({computador,vazio});
-	{ok,[2]} -> bam_ctrl ! {bam_ui, nivel, intermediario},
-		    %ins_nome({computador,vazio});
-		    io:format("Este nivel nao esta disponivel a esta versao"),
-		    sel_nivel();
+	{ok,[1]} -> 
+	    bam_ctrl ! {bam_ui, nivel, facil},
+	    ins_nome({computador,vazio});
+	%{ok,[2]} -> bam_ctrl ! {bam_ui, nivel, intermediario},
+	%	    %ins_nome({computador,vazio});
+	%	    io:format("Este nivel nao esta disponivel a esta versao"),
+	%	    sel_nivel();
 
-	{ok,[3]} -> bam_ctrl ! {bam_ui, nivel, dificil},
+	%{ok,[3]} -> bam_ctrl ! {bam_ui, nivel, dificil},
 		    %ins_nome({computador,vazio});
-		    io:format("Este nivel nao esta disponivel a esta versao"),
-		    sel_nivel();
+	%	    io:format("Este nivel nao esta disponivel a esta versao"),
+	%	    sel_nivel();
 
 	{ok, _} -> io:format("\nOPCAO INVALIDA\n"++
 			     "TENTE NOVAMENTE\n\n"),
-		   sel_nivel()
+		   io:fread("...Pressione <ENTER> para continuar...",""),
+		   sel_nivel();
+	{erro, _} -> 
+	    io:format("\nDigite Apenas Numeros\n\n"),
+	    io:fread("...Pressione <ENTER> para continuar...",""),
+	    sel_nivel()
+		     
     end.
 
 %%-----------------------------------------------------------------------------
@@ -182,6 +196,8 @@ ativo() ->
 	    case Estado of
 		{ jogando, computador} ->
 		    io:format(os:cmd(clear)),
+		    bam_ctrl ! {bam_ui, jogada, computador},
+		    bam_ctrl ! {bam_ui, partida, refresh},
 		    ativo();
 
 		{ jogando, Jog} ->
