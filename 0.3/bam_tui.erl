@@ -259,7 +259,7 @@ ativo() ->
 			       computador -> atom_to_list(Nome2)
 			   end,
 		    io:format("\nSua partida TERMINOU\n\n"++
-				  "O jogador "++ Nome ++" GANHOU o/o/o/ \n\n"++
+				  "O jogador "++ Nome ++" GANHOU \\o/ \\o/ \\o/ \n\n"++
 				  "Menu BAM\n"++
 				  "(1)Menu Principal\n"++
 				  "(2)Reiniciar Partida\n"),
@@ -294,14 +294,12 @@ ativo() ->
 		    io:format("Posicao fora das definidas no tabuleiro!!"),
 		    io:fread("...Pressione <ENTER> para continuar...",""),
 		    io:format(os:cmd(clear)),
-		    bam_ctrl ! {bam_ui, partida, refresh},
 		    ativo();
 
 		pos_ocupada ->
 		    io:format("Posicao ja ocupada!!"),
 		    io:fread("...Pressione <ENTER> para continuar...",""),
 		    io:format(os:cmd(clear)),
-		    bam_ctrl ! {bam_ui, partida, refresh},
 		    ativo()
 	    end
     end.
